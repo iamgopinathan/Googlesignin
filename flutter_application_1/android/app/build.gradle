@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'com.google.gms.google-services' // Add this line if you are using Firebase
+}
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        applicationId "com.example.flutter_auth"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        options.compilerArgs << "-Xlint:deprecation"
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug // Use your release signing configuration
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation platform('com.google.firebase:firebase-bom:32.5.0') // Use the latest version
+    implementation 'com.google.firebase:firebase-analytics'
+    // Add other Firebase dependencies as needed
+}
